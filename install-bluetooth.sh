@@ -5,8 +5,14 @@ read REPLY
 if [[ ! "$REPLY" =~ ^(yes|y|Y)$ ]]; then exit 0; fi
 
 apt install -y --no-install-recommends alsa-base alsa-utils bluealsa bluez python-gobject python-dbus vorbis-tools sound-theme-freedesktop
+#Adduser 
 
-# WoodenBeaver sounds
+sudo useradd btspeaker
+sudo adduser pi bluetooth
+sudo adduser btspeaker audio
+sudo adduser btspeaker bluetooth
+
+# Octavio sounds
 mkdir -p /usr/local/share/sounds/octavio
 if [ ! -f /usr/local/share/sounds/octavio/bt_connect.ogg ]; then
     curl -so /usr/local/share/sounds/octavio/bt_connect.ogg https://raw.githubusercontent.com/dmckminard/Octavio_Bluetooth/blob/master/bt_connect.ogg
