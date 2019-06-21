@@ -17,3 +17,9 @@ ExecStart=/usr/bin/ogg123 -q /usr/local/share/sounds/octavio/connect.ogg
 WantedBy=multi-user.target
 EOF
 systemctl enable startup-sound.service
+
+echo -n "Reboot now ? [y/N] "
+read REPLY
+if [[ ! "$REPLY" =~ ^(yes|y|Y)$ ]]; then exit 0; fi
+
+sudo reboot
