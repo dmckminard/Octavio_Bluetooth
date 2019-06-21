@@ -1,18 +1,18 @@
 #!/bin/bash -e
 
-echo -n "Do you want to install Bluetooth Audio (BlueALSA)? [y/N] "
+echo -n "Installer AP Bluetooth ? (BlueALSA)? [y/N] "
 read REPLY
 if [[ ! "$REPLY" =~ ^(yes|y|Y)$ ]]; then exit 0; fi
 
 apt install -y --no-install-recommends alsa-base alsa-utils bluealsa bluez python-gobject python-dbus vorbis-tools sound-theme-freedesktop
 
 # WoodenBeaver sounds
-mkdir -p /usr/local/share/sounds/WoodenBeaver/stereo
-if [ ! -f /usr/local/share/sounds/WoodenBeaver/stereo/device-added.ogg ]; then
-    curl -so /usr/local/share/sounds/WoodenBeaver/stereo/device-added.ogg https://raw.githubusercontent.com/madsrh/WoodenBeaver/master/WoodenBeaver/stereo/device-added.ogg
+mkdir -p /usr/local/share/sounds/octavio
+if [ ! -f /usr/local/share/sounds/octavio/bt_connect.ogg ]; then
+    curl -so /usr/local/share/sounds/octavio/bt_connect.ogg https://raw.githubusercontent.com/dmckminard/Octavio_Bluetooth/blob/master/bt_connect.ogg
 fi
-if [ ! -f /usr/local/share/sounds/WoodenBeaver/stereo/device-removed.ogg ]; then
-    curl -so /usr/local/share/sounds/WoodenBeaver/stereo/device-removed.ogg https://raw.githubusercontent.com/madsrh/WoodenBeaver/master/WoodenBeaver/stereo/device-removed.ogg
+if [ ! -f /usr/local/share/sounds/octavio/bt_deconnect.ogg ]; then
+    curl -so /usr/local/share/sounds/octavio/bt_deconnect.ogg https://raw.githubusercontent.com/dmckminard/Octavio_Bluetooth/blob/master/bt_deconnect.ogg
 fi
 
 # Bluetooth settings
@@ -20,14 +20,15 @@ cat <<'EOF' > /etc/bluetooth/main.conf
 [General]
 Class = 0x200414
 DiscoverableTimeout = 0
+PairableTimeout = 0
 
 [Policy]
 AutoEnable=true
 EOF
 
 service bluetooth start
-hciconfig hci0 piscan
-hciconfig hci0 sspmode 1
+sudo hciconfig hci0 piscan
+sudo hciconfig hci0 sspmode 1
 
 mkdir -p /opt/local/bin
 
@@ -172,12 +173,14 @@ Wants=bluetooth.target sound.target
 
 [Service]
 Type=simple
-User=root
 ExecStartPre=/bin/sleep 2
 ExecStart=/usr/bin/bluealsa-aplay --pcm-buffer-time=250000 00:00:00:00:00:00
+User=btspeaker
+StandardError=syslog
+SyslogIdentifier=bluealsa_aplay
 
 [Install]
-WantedBy=graphical.target
+WantedBy=multi-user.target
 EOF
 systemctl daemon-reload
 systemctl enable bluealsa-aplay
@@ -192,16 +195,16 @@ action=$(expr "$ACTION" : "\([a-zA-Z]\+\).*")
 
 if [ "$action" = "add" ]; then
     echo -e 'discoverable off\nexit\n' | bluetoothctl
-    if [ ! -f /usr/local/share/sounds/WoodenBeaver/stereo/device-added.ogg ]; then
-        ogg123 -q /usr/local/share/sounds/WoodenBeaver/stereo/device-added.ogg
+    if [ ! -f /usr/local/share/sounds/octavio/bt_connect.ogg ]; then
+        ogg123 -q /usr/local/share/sounds/octavio/bt_connect.ogg
     fi
     # disconnect wifi to prevent dropouts
     # ifconfig wlan0 down &
 fi
 
 if [ "$action" = "remove" ]; then
-    if [ ! -f /usr/local/share/sounds/WoodenBeaver/stereo/device-removed.ogg ]; then
-        ogg123 -q /usr/local/share/sounds/WoodenBeaver/stereo/device-removed.ogg
+    if [ ! -f /usr/local/share/sounds/octavio/bt_deconnect.ogg ]; then
+        ogg123 -q /usr/local/share/sounds/octavio/bt_deconnect.ogg
     fi
     # reenable wifi
     # ifconfig wlan0 up &
