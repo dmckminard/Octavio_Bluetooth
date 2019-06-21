@@ -59,8 +59,7 @@ pcm.writeFile {
 }
 EOF
 
-cat <<'EOF' > /etc/bluetooth/main.conf
-# start snapclient automatically?
+cat <<'EOF' > /etc/default/snapclient
 START_SNAPCLIENT=true
 
 # Allowed options:
@@ -82,4 +81,30 @@ USER_OPTS="--user snapclient:audio"
 SNAPCLIENT_OPTS="-s 3 -d"
 EOF
 
+cat <<'EOF' > /etc/default/snapserver
+START_SNAPSERVER=true
 
+# Allowed options:
+#   -h, --help                          Produce help message
+#   -v, --version                       Show version number
+#   -p, --port arg (=1704)              Server port
+#   --controlPort arg (=1705)           Remote control port
+#   -s, --stream arg (=pipe:///tmp/snapfifo?name=default)
+#                                       URI of the PCM input stream.
+#                                       Format: TYPE://host/path?name=NAME
+#                                       [&codec=CODEC]
+#                                       [&sampleformat=SAMPLEFORMAT]
+#   --sampleformat arg (=48000:16:2)    Default sample format
+#   -c, --codec arg (=flac)             Default transport codec
+#                                       (flac|ogg|pcm)[:options]
+#                                       Type codec:? to get codec specific options
+#   --streamBuffer arg (=20)            Default stream read buffer [ms]
+#   -b, --buffer arg (=1000)            Buffer [ms]
+#   --sendToMuted                       Send audio to muted clients
+#   -d, --daemon [=arg(=0)]             Daemonize
+#                                       optional process priority [-20..19]
+#   --user arg                          the user[:group] to run snapserver as when daemonized
+
+USER_OPTS="--user snapserver:snapserver"
+SNAPSERVER_OPTS="-b 100 -d -s pipe:///tmp/bluesnapfifo?name=Bluetooth"
+EOF
