@@ -13,5 +13,5 @@ sudo apt upgrade -y
 
 echo "Installing components"
 sudo ./install-bluetooth.sh
-sudo ./install-snapcast-client.sh
+sudo ./install_config_sound.sh
 sudo ./install-startup-sound.sh
