@@ -227,3 +227,5 @@ EOF
 cat <<'EOF' > /etc/machine-info
 PRETTY_HOSTNAME=Octavio
 EOF
+
+sudo service bluetooth restart
