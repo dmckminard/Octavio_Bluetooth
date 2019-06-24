@@ -15,10 +15,10 @@ sudo adduser btspeaker bluetooth
 # Octavio sounds
 mkdir -p /usr/local/share/sounds/octavio
 if [ ! -f /usr/local/share/sounds/octavio/bt_connect.ogg ]; then
-    curl -so /usr/local/share/sounds/octavio/bt_connect.ogg https://raw.githubusercontent.com/dmckminard/Octavio_Bluetooth/blob/master/bt_connect.ogg
+    curl -so /usr/local/share/sounds/octavio/bt_connect.ogg https://github.com/dmckminard/Octavio_Bluetooth/blob/master/bt_connect.ogg?raw=true
 fi
 if [ ! -f /usr/local/share/sounds/octavio/bt_deconnect.ogg ]; then
-    curl -so /usr/local/share/sounds/octavio/bt_deconnect.ogg https://raw.githubusercontent.com/dmckminard/Octavio_Bluetooth/blob/master/bt_deconnect.ogg
+    curl -so /usr/local/share/sounds/octavio/bt_deconnect.ogg https://github.com/dmckminard/Octavio_Bluetooth/blob/master/bt_deconnect.ogg?raw=true
 fi
 
 # Bluetooth settings
