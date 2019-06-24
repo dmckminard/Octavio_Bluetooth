@@ -223,3 +223,7 @@ cat <<'EOF' > /etc/udev/rules.d/99-bluetooth-udev.rules
 SUBSYSTEM=="input", GROUP="input", MODE="0660"
 KERNEL=="input[0-9]*", RUN+="/opt/local/bin/bluetooth-udev"
 EOF
+
+cat <<'EOF' > /etc/machine-info
+PRETTY_HOSTNAME=Octavio
+EOF
