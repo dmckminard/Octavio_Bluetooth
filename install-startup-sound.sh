@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 if [ ! -f /usr/local/share/sounds/octavio/connect.ogg ]; then
-    curl -so /usr/local/share/sounds/octavio/connect.ogg https://raw.githubusercontent.com/dmckminard/Octavio_Bluetooth/blob/master/connect.ogg
+    curl -so /usr/local/share/sounds/octavio/connect.ogg https://github.com/dmckminard/Octavio_Bluetooth/blob/master/connect.ogg?raw=true
 fi
 
 cat <<'EOF' > /etc/systemd/system/startup-sound.service
