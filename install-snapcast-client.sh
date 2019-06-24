@@ -21,7 +21,7 @@ apt -f install -y
 
 # Config fichiers audio
 
-cat <<'EOF' > /etc/bluetooth/main.conf
+cat <<'EOF' > /etc/asound.conf
 pcm.hifiberry {
     type softvol
     slave.pcm "plughw:0"
@@ -36,7 +36,7 @@ EOF
 
 sudo mkdir /home/btspeaker
 
-cat <<'EOF' > /etc/bluetooth/main.conf
+cat <<'EOF' > /home/btspeaker/.asoundrc
 pcm.!default {
         type plug
         slave.pcm rate48000Hz
