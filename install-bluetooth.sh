@@ -206,7 +206,7 @@ KERNEL=="input[0-9]*", RUN+="/opt/local/bin/bluetooth-udev"
 EOF
 
 cat <<'EOF' > /etc/machine-info
-PRETTY_HOSTNAME=Octavio
+PRETTY_HOSTNAME=Octavio_SetupNeeded
 EOF
 
 sudo service bluetooth restart
