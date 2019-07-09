@@ -192,19 +192,9 @@ action=$(expr "$ACTION" : "\([a-zA-Z]\+\).*")
 
 if [ "$action" = "add" ]; then
     echo -e 'discoverable off\nexit\n' | bluetoothctl
-    if [ ! -f /usr/local/share/sounds/octavio/bt_connect.ogg ]; then
-        ogg123 -q /usr/local/share/sounds/octavio/bt_connect.ogg
-    fi
-    # disconnect wifi to prevent dropouts
-    # ifconfig wlan0 down &
 fi
 
 if [ "$action" = "remove" ]; then
-    if [ ! -f /usr/local/share/sounds/octavio/bt_deconnect.ogg ]; then
-        ogg123 -q /usr/local/share/sounds/octavio/bt_deconnect.ogg
-    fi
-    # reenable wifi
-    # ifconfig wlan0 up &
     echo -e 'discoverable on\nexit\n' | bluetoothctl
 fi
 EOF
