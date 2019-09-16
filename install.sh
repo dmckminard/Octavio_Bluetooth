@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-HOSTNAME="Octavio_LEDS"
-PRETTY_HOSTNAME="Octavio_LEDS"
+HOSTNAME="OctavioLEDS"
+PRETTY_HOSTNAME="OctavioLEDS"
 sudo raspi-config nonint do_hostname ${HOSTNAME:-$(hostname)}
 
 CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)
