@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-HOSTNAME="Octavio_SetupNeeded"
-PRETTY_HOSTNAME="Octavio_SetupNeeded"
+HOSTNAME="Octavio_LEDS"
+PRETTY_HOSTNAME="Octavio_LEDS"
 sudo raspi-config nonint do_hostname ${HOSTNAME:-$(hostname)}
 
 CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)
@@ -14,4 +14,3 @@ sudo apt upgrade -y
 echo "Installing components"
 sudo ./install-bluetooth.sh
 sudo ./install_config_sound.sh
-sudo ./install-startup-sound.sh
