@@ -146,6 +146,8 @@ WantedBy=multi-user.target
 [Service]
 Type=simple
 ExecStart=/opt/local/bin/bluetooth-agent
+Restart=on-failure
+RestartSec=1s
 EOF
 systemctl enable bluetooth-agent.service
 
