@@ -177,6 +177,8 @@ ExecStart=/usr/bin/bluealsa-aplay --pcm-buffer-time=250000 00:00:00:00:00:00
 User=btspeaker
 StandardError=syslog
 SyslogIdentifier=bluealsa_aplay
+Restart=on-failure
+RestartSec=1s
 
 [Install]
 WantedBy=multi-user.target
