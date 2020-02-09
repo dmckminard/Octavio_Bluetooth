@@ -196,10 +196,12 @@ action=$(expr "$ACTION" : "\([a-zA-Z]\+\).*")
 
 if [ "$action" = "add" ]; then
     echo -e 'discoverable off\nexit\n' | bluetoothctl
+    echo -e 'pairable off\nexit\n' | bluetoothctl
 fi
 
 if [ "$action" = "remove" ]; then
     echo -e 'discoverable on\nexit\n' | bluetoothctl
+    echo -e 'pairable on\nexit\n' | bluetoothctl
 fi
 EOF
 chmod 755 /opt/local/bin/bluetooth-udev
