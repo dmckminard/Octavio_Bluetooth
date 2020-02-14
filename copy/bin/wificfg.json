@@ -1,0 +1,16 @@
+{
+    "dnsmasq_cfg": {
+	"address": "/#/10.0.0.1",
+	"dhcp_range": "10.0.0.100,10.0.0.150,1h",
+	"vendor_class": "set:device,IoT"
+    },
+    "host_apd_cfg": {
+	"ip": "10.0.0.1",
+	"ssid": "Octavio Setup",
+	"wpa_passphrase":"givemeoctavio",
+	"channel": "6"
+    },
+    "wpa_supplicant_cfg": {
+	"cfg_file": "/etc/wpa_supplicant/wpa_supplicant.conf"
+    }
+}
