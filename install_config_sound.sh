@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # Installation Snapcast et Snapserver
-SNAPCLIENT_VERSION=0.15.0
-SNAPSERVER_VERSION=0.15.0
+SNAPCLIENT_VERSION=0.19.0
+SNAPSERVER_VERSION=0.19.0
 
 echo -n "Snapcast deja install? (snapclient v${SNAPCLIENT_VERSION}) (snapserver v${SNAPSERVER_VERSION})? [y/N] "
 read REPLY
